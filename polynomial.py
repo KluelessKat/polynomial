@@ -4,6 +4,9 @@ class X:
 
     def __repr__(self):
         return "X"
+    
+    def evaluate (self, i):
+        return Int(i)
 
 class Int:
     def __init__(self, i):
@@ -11,6 +14,9 @@ class Int:
     
     def __repr__(self):
         return str(self.i)
+    
+    def evaluate (self, i):
+        return self
     
 
 class Add:
@@ -30,6 +36,11 @@ class Mul:
     def __init__(self, p1, p2):
         self.p1 = p1
         self.p2 = p2
+
+    def evaluate (self, i):
+        p1 = self.p1.evaluate(i)
+        p2 = self.p2.evaluate(i)
+        return Int(p1.i * p2.i)
     
     def __repr__(self):
         if isinstance(self.p1, Add):
